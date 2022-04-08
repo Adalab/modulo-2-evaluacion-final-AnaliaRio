@@ -9,8 +9,8 @@
 :root {
     color: rgb(117, 115, 115);
     font-family: Arial, Helvetica, sans-serif;
-    margin-left: 30px;
-    margin-top: 30px;
+    margin-left: 40px;
+    margin-top: 40px;
     background: linear-gradient(rgb(221, 216, 216), rgb(204, 155, 155));
     height: 100%;
     background-repeat: no-repeat;
@@ -52,4 +52,17 @@
 .img {
     height: 150px;
     margin-bottom: 20px;
+}
+
+.toast {
+    position: absolute;
+    top: 45px;
+    right: 50px;
+    width: 30%;
+    border-radius: 40px;
+
+    @media all and (max-width: 350px) {
+        display:none;
+    }
+
 }

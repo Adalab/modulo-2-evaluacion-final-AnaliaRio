@@ -9,6 +9,8 @@ const resetBtn = document.querySelector(".js-reset");
 // C - List
 const renderizedList = document.querySelector(".js-list");
 // C - Input Value
+const renderizedFavoritesList = document.querySelector(".js-favorites");
+
 const inputValue = input.value;
 
 // const SERVER_URL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita"
@@ -31,9 +33,18 @@ const inputValue = input.value;
 // RENDER DRINK LIST IN HTML
 function renderList (listDrinks) {
     for (const drink of listDrinks) {
-        renderizedList.innerHTML +=  `<li><h2 class="drink-name">${drink.strDrink}</h2><img src=${drink.strDrinkThumb} class="img" alt="cocktail"></li>`;
+        renderizedList.innerHTML +=  `<li class="liDrink" id=${drink.idDrink}><h2 class="drink-name">${drink.strDrink}</h2><img src=${drink.strDrinkThumb} class="img" alt="cocktail"></li>`;
     }
+    
+    const liDrinks = document.querySelectorAll(".liDrink");
+
+    for (const li of liDrinks) {
+    li.addEventListener("click", handleClickOnDrink);
+    };
+
 };
+
+
 
 function handleSearchBtnClick(event) {
     event.preventDefault();
@@ -75,35 +86,40 @@ function handleClickOnDrink (event) {
     // Obtener sobre qué bebida hago click
     const idSelectedDrink = event.currentTarget.id; 
 
-    const foundDrink = favorites.find(fav=>{
-        return fav.id === idSelectedDrink;
+    const foundDrink = drinksList.find(clickedDrink=>{
+        return clickedDrink.idDrink === idSelectedDrink;
     });
 
     // Compruebo si la bebida que recibo por parámetro está en los favoritos
-  const favoriteFoundIndex = favorites.findIndex(fav=>{
-    return fav.id === idSelectedDrink; 
-  }); 
+    const favoriteFoundIndex = favorites.findIndex(fav=>{
+        return fav.idDrink === idSelectedDrink; 
+     }); 
 
-
-  if(favoriteFoundIndex === -1){ //No lo encontró
-    favorites.push(foundDrink);  
-    
-    //paletteLi.classList.add("palette--favorite"); // //Otra versión: para pintar los favoritos cada vez doy clic
-
-  }else{
+    if(favoriteFoundIndex === -1){ //No lo encontró
+        favorites.push(foundDrink);  
+    }
+    else {
     //eliminar de la lista de favoritos
-    favorites.splice(favoriteFoundIndex,1); 
+        favorites.splice(favoriteFoundIndex,1); 
+    }
 
-    //paletteLi.classList.remove("palette--favorite"); // //Otra versión: para pintar los favoritos cada vez doy clic
-  }
+    renderFavorites(favorites);
 
-  renderList(palettes);
-  //console.log(favorites); 
+  console.log(favorites); 
 
+};
 
-}
+// RENDER FAVORITE DRINKS IN HTML
 
+function renderFavorites (favorites) {
 
+    renderizedFavoritesList.innerHTML = "";
+
+    for (const favoriteDrink of favorites) {
+        renderizedFavoritesList.innerHTML +=  `<li class="liDrink" id=${favoriteDrink.idDrink}><h2 class="drink-name">${favoriteDrink.strDrink}</h2><img src=${favoriteDrink.strDrinkThumb} class="img" alt="cocktail"></li>`;
+    }
+ 
+};
 
 
 
