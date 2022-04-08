@@ -2,33 +2,28 @@
 <html lang="es">
   <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/main.css" />
     <title>Evaluación final Javascript</title>
   </head>
   <body>
-    <h1 class="title js-title">Buscador Cócteles 🍸</h1>
+    <main ="class" ="main">
+      <h1 class="title js-title">Buscador Cócteles 🍸</h1>
+      <input type="text" class="input js-input" />
+      <button class="btn js-search">Buscar</button>
+      <button class="btn js-reset">Reset</button>
 
-    <input
-      type="text"
-      class="input js-input">
+      <section class="section">
+        <article class="article">
+          <h2 class="subtitle">Favoritos</h2>
+          <ul class="js-favorites"><li></li></ul>
+        </article>
+        <article class="article">
+          <h2 class="subtitle">Lista</h2>
+          <ul class="list js-list"><li></li></ul>
+        </article>
+      </section>
+    </main>
 
-    <button
-      class="btn js-search">
-      Buscar
-    </button>
-
-    <button
-    class="btn js-reset">
-    Reset
-  </button>
-
-  <ul class="js-list"></ul>
-  <ul class="js-favorites"></ul>
-
-    <script
-    type="text/javascript"
-    src="./js/main.js">
-    </script>
-
+    <script type="text/javascript" src="./js/main.js"></script>
   </body>
 </html>

@@ -11,15 +11,45 @@
     font-family: Arial, Helvetica, sans-serif;
     margin-left: 30px;
     margin-top: 30px;
+    background: linear-gradient(rgb(221, 216, 216), rgb(204, 155, 155));
+    height: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .title {
-    font-size: 40px;
+    font-size: 45px;
     margin-bottom: 20px;
 }
 
+.subtitle {
+    font-size: 30px;
+    margin-bottom: 15px;
+
+}
+
+.section {
+    display: flex;
+    flex-direction: row;
+    gap: 150px;
+}
+
+.article{
+    display: flex;
+    flex-direction: column;
+}
 
 .input, .btn {
     font-size: 18px;
     padding: 0 15px;
+    margin-bottom: 30px;
+}
+
+.drink-name {
+    margin-bottom: 5px;
+}
+
+.img {
+    height: 150px;
+    margin-bottom: 20px;
 }
