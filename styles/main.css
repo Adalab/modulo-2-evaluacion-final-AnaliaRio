@@ -55,14 +55,27 @@
 }
 
 .toast {
-    position: absolute;
-    top: 45px;
-    right: 50px;
-    width: 30%;
+    visibility: hidden;
+    position: relative;
+    top: 0px;
+    right: 0px;
+    width: 20%;
     border-radius: 40px;
+    display: block;
+    margin-bottom: 30px;
+}
 
-    @media all and (max-width: 350px) {
-        display:none;
+@media all and (min-width: 350px) {
+    .toast {
+        visibility: visible;
+    
     }
+}
 
+.form {
+    position: relative;
+}
+
+.favorite {
+    
 }
