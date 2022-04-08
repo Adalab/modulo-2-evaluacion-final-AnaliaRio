@@ -33,7 +33,19 @@ const inputValue = input.value;
 // RENDER DRINK LIST IN HTML
 function renderList (listDrinks) {
     for (const drink of listDrinks) {
-        renderizedList.innerHTML +=  `<li class="liDrink" id=${drink.idDrink}><h2 class="drink-name">${drink.strDrink}</h2><img src=${drink.strDrinkThumb} class="img" alt="cocktail"></li>`;
+        
+        const favoriteFoundIndex = favorites.findIndex(fav=>{
+            return fav.idDrink === idSelectedDrink; 
+         }); 
+    
+        if( favoriteFoundIndex === -1){
+            renderizedList.innerHTML += `<li class="liDrink" id=${drink.idDrink}><h2 class="drink-name">${drink.strDrink}</h2><img src=${drink.strDrinkThumb} class="img" alt="cocktail"></li>`;
+         }
+
+        else {
+            renderizedList.innerHTML += `<li class="favorite liDrink" id=${drink.idDrink}><h2 class="drink-name">${drink.strDrink}</h2><img src=${drink.strDrinkThumb} class="img" alt="cocktail"></li>`;
+        }
+
     }
     
     const liDrinks = document.querySelectorAll(".liDrink");
@@ -43,7 +55,6 @@ function renderList (listDrinks) {
     };
 
 };
-
 
 
 function handleSearchBtnClick(event) {
@@ -66,6 +77,7 @@ function handleResetBtnClick(event) {
 }
 
 resetBtn.addEventListener("click",handleResetBtnClick);
+
 
 // FILLER IMAGE
 function fillerImage(data) {

@@ -77,5 +77,8 @@
 }
 
 .favorite {
-    
+    /* color: linear-gradient(rgb(221, 216, 216), rgb(204, 155, 155));
+    background-color: rgb(117, 115, 115); */
+    border: solid 1px red;
+
 }
