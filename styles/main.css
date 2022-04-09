@@ -9,13 +9,17 @@
 :root {
     color: rgb(117, 115, 115);
     font-family: Arial, Helvetica, sans-serif;
-    margin-left: 40px;
-    margin-top: 40px;
-    background: linear-gradient(rgb(221, 216, 216), rgb(204, 155, 155));
+    background: linear-gradient(rgb(227, 227, 227), rgb(148, 147, 147));
     height: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+
+.main {
+    height: 100vh;
+    margin: 40px 40px 0;
+}
+
 
 .title {
     font-size: 45px;
@@ -39,6 +43,17 @@
     flex-direction: column;
 }
 
+.favorites-article {
+width: 25%;
+border: solid 3px brown;
+}
+
+.list-article {
+width: 75%;
+border: solid 3px brown;
+
+}
+
 .input, .btn {
     font-size: 18px;
     padding: 0 15px;
@@ -55,20 +70,18 @@
 }
 
 .toast {
-    visibility: hidden;
     position: relative;
     top: 0px;
     right: 0px;
     width: 20%;
     border-radius: 40px;
     display: block;
-    margin-bottom: 30px;
+    margin-bottom: 30px;   
 }
 
-@media all and (min-width: 350px) {
+@media all and (max-width: 350px) {
     .toast {
-        visibility: visible;
-    
+        display:none;
     }
 }
 
@@ -77,8 +90,28 @@
 }
 
 .favorite {
-    /* color: linear-gradient(rgb(221, 216, 216), rgb(204, 155, 155));
-    background-color: rgb(117, 115, 115); */
-    border: solid 1px red;
+    border: solid 2px rgb(96, 38, 27);
 
 }
+
+.li {
+    border: solid 2px rgb(96, 38, 27);
+}
+
+.footer {
+   position: relative;
+    width: 100%;
+    padding: 0 30px 0;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: solid 1px rgba(96, 38, 27, 0.667);
+    margin: 0;
+    background-color: #fff;
+}
+
+.logo {
+width: 113px;
+}
+

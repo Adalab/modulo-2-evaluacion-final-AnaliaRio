@@ -1,19 +1,14 @@
 "use strict";
 
-// C - Input
+// CONSTANTS
 const input = document.querySelector(".js-input");
-// C- Search Button
 const searchBtn = document.querySelector(".js-search");
-// C - Reset Btn
 const resetBtn = document.querySelector(".js-reset");
-// C - List
-const renderizedList = document.querySelector(".js-list");
-// C - Input Value
-const renderizedFavoritesList = document.querySelector(".js-favorites");
-
+const renderedList = document.querySelector(".js-list");
+const renderedFavoritesList = document.querySelector(".js-favorites");
 const inputValue = input.value;
-
 // const SERVER_URL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita"
+
 
 // FETCH DATA FROM API
 let drinksList = [];
@@ -30,20 +25,21 @@ const inputValue = input.value;
   }); 
 }
 
-// RENDER DRINK LIST IN HTML
+// RENDER SEARCH RESULT IN HTML !!!!!!!!!!!
 function renderList (listDrinks) {
     for (const drink of listDrinks) {
         
         const favoriteFoundIndex = favorites.findIndex(fav=>{
-            return fav.idDrink === idSelectedDrink; 
-         }); 
+            return fav.idDrink !== -1;
+            // Encontrar variable que dice si drink es favorito o no
+        }); 
     
-        if( favoriteFoundIndex === -1){
-            renderizedList.innerHTML += `<li class="liDrink" id=${drink.idDrink}><h2 class="drink-name">${drink.strDrink}</h2><img src=${drink.strDrinkThumb} class="img" alt="cocktail"></li>`;
-         }
+        if( favoriteFoundIndex === -1){ // No está en favoritos
+            renderedList.innerHTML += `<li class="li liDrink" id=${drink.idDrink} ><h2 class="drink-name">${drink.strDrink}</h2><img src=${drink.strDrinkThumb} class="img" alt="cocktail"></li>`;
+        }
 
-        else {
-            renderizedList.innerHTML += `<li class="favorite liDrink" id=${drink.idDrink}><h2 class="drink-name">${drink.strDrink}</h2><img src=${drink.strDrinkThumb} class="img" alt="cocktail"></li>`;
+        else { //Está en favoritos
+            renderedList.innerHTML += `<li class="li favorite liDrink" id=${drink.idDrink}><h2 class="drink-name">${drink.strDrink}</h2><img src=${drink.strDrinkThumb} class="img" alt="cocktail"></li>`;
         }
 
     }
@@ -56,7 +52,6 @@ function renderList (listDrinks) {
 
 };
 
-
 function handleSearchBtnClick(event) {
     event.preventDefault();
     getData();
@@ -65,10 +60,10 @@ function handleSearchBtnClick(event) {
 searchBtn.addEventListener("click",handleSearchBtnClick);
 
 
-// RESET RENDERIZED DRINK LIST & EMPTY THE ARRAY WITH THE DATA
+// RESET RENDERED DRINK LIST & EMPTY THE ARRAY WITH THE DATA
 function resetList () {
     drinksList = [];
-    renderizedList.innerHTML = "";
+    renderedList.innerHTML = "";
 };
 
 function handleResetBtnClick(event) {
@@ -77,7 +72,6 @@ function handleResetBtnClick(event) {
 }
 
 resetBtn.addEventListener("click",handleResetBtnClick);
-
 
 // FILLER IMAGE
 function fillerImage(data) {
@@ -89,8 +83,7 @@ function fillerImage(data) {
     }
 ;}
 
-// FAVORITE DRINKS
-
+// SELECT FAVORITE DRINKS !!!!!!!!!!
 let favorites = [];
 
 function handleClickOnDrink (event) {
@@ -105,7 +98,7 @@ function handleClickOnDrink (event) {
     // Compruebo si la bebida que recibo por parámetro está en los favoritos
     const favoriteFoundIndex = favorites.findIndex(fav=>{
         return fav.idDrink === idSelectedDrink; 
-     }); 
+    }); 
 
     if(favoriteFoundIndex === -1){ //No lo encontró
         favorites.push(foundDrink);  
@@ -122,18 +115,12 @@ function handleClickOnDrink (event) {
 };
 
 // RENDER FAVORITE DRINKS IN HTML
-
 function renderFavorites (favorites) {
 
-    renderizedFavoritesList.innerHTML = "";
+    renderedFavoritesList.innerHTML = "";
 
     for (const favoriteDrink of favorites) {
-        renderizedFavoritesList.innerHTML +=  `<li class="liDrink" id=${favoriteDrink.idDrink}><h2 class="drink-name">${favoriteDrink.strDrink}</h2><img src=${favoriteDrink.strDrinkThumb} class="img" alt="cocktail"></li>`;
+        renderedFavoritesList.innerHTML +=  `<li class="liDrink" id=${favoriteDrink.idDrink}><h2 class="drink-name">${favoriteDrink.strDrink}</h2><img src=${favoriteDrink.strDrinkThumb} class="img" alt="cocktail"></li>`;
     }
  
 };
-
-
-
-
-
