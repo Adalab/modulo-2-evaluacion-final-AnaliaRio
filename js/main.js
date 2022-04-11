@@ -120,13 +120,33 @@ function renderFavorites (favorites) {
     renderedFavoritesList.innerHTML = "";
 
     for (const favoriteDrink of favorites) {
-        renderedFavoritesList.innerHTML +=  `<li class="liDrink" id=${favoriteDrink.idDrink}><h2 class="drink-name">${favoriteDrink.strDrink}</h2><img src=${favoriteDrink.strDrinkThumb} class="img" alt="cocktail"></li>`;
+        renderedFavoritesList.innerHTML +=  `<li class="li liDrink" id=${favoriteDrink.idDrink}><h2 class="drink-name">${favoriteDrink.strDrink}</h2><img src=${favoriteDrink.strDrinkThumb} class="img" alt="cocktail"></li>`;
     }
  
 };
 
 // LOCAL STORAGE
-// localStorage.setItem('favorites', JSON.stringify(favorites));
-// });
-// }
-// }
+localStorage.setItem("favorites", "lsFavorites");
+const localStorageFavorites = JSON.parse(localStorage.getItem("lsFavorites"));
+
+// Validar si datos son válidos
+// Si es la primera vez que entro en la página:
+if(localStorageFavorites !== null){
+    favorites= localStorageFavorites; 
+    renderFavorites(favorites);
+  }
+  else{
+  // No tengo datos en el local storage
+  // Fetch favorites form server
+  fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${inputValue}`)
+  .then(response => response.json())
+  .then(data => {
+      // Guardar en variable global de favoritos
+      favorites = data.favorites; 
+      // sí tengo datos en el local storage, así lo parseo a un array 
+      localStorage.setItem("lsFavorites", JSON.stringify(favorites));
+      //Paint/renderizar HTML
+      // cada vez que modifico los arrays de favoritos vuelvo pintar y a escuchar eventos
+      renderFavorites(favorites); 
+  });
+};

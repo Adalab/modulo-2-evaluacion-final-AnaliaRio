@@ -48,17 +48,19 @@
 }
 
 .favorites-article {
-    width: 25%;
+    width: 20%;
 }
 
 .list-article {
-    width: 75%;
+    width: 80%;
 }
 
 .favorites {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    align-items: center;
+    /* padding: 10px 0; */
 }
 
 .list {
