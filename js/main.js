@@ -4,7 +4,6 @@
 const input = document.querySelector(".js-input");
 const searchBtn = document.querySelector(".js-search");
 const resetBtn = document.querySelector(".js-reset");
-const resetFavoritesBtn = document.querySelector(".js-reset-favorites");
 const renderedList = document.querySelector(".js-list");
 const renderedFavoritesList = document.querySelector(".js-favorites");
 const inputValue = input.value;
@@ -106,6 +105,7 @@ function handleClickOnDrink (event) {
         favorites.splice(favoriteFoundIndex,1); 
     }
 
+    localStorage.setItem("lsFavorites", JSON.stringify(favorites));
     renderFavorites(favorites);
 
   console.log(favorites); 
@@ -124,7 +124,6 @@ function renderFavorites (favorites) {
 };
 
 // LOCAL STORAGE
-localStorage.setItem("favorites", "lsFavorites");
 const localStorageFavorites = JSON.parse(localStorage.getItem("lsFavorites"));
 
 // Validate data.
@@ -133,25 +132,6 @@ const localStorageFavorites = JSON.parse(localStorage.getItem("lsFavorites"));
 if(localStorageFavorites !== null){
     favorites= localStorageFavorites; 
     renderFavorites(favorites);
-  }
+}
 
-  else{
-  // There is no data in local storage.
-  // Fetch favorites from server:
-
-  fetch(`${SERVER_URL}${inputValue}`)
-  .then(response => response.json())
-  .then(data => {
-
-      // Save in global variable:
-      favorites = data.favorites; 
-
-      // If I have data in local storage it must be parsed into an array: 
-      localStorage.setItem("lsFavorites", JSON.stringify(favorites));
-
-      //Paint/render HTML.
-      // Every single time an array is modified it has to be rendered again. Events must be listened to again:
-      renderFavorites(favorites);
-
-  });
-};
+// localStorage.setItem("lsFavorites", JSON.stringify(favorites));
