@@ -10,7 +10,6 @@ const renderedFavoritesList = document.querySelector(".js-favorites");
 const inputValue = input.value;
 const SERVER_URL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
 
-
 // FETCH DATA FROM API
 let drinksList = [];
 
@@ -25,7 +24,7 @@ const inputValue = input.value;
   }); 
 }
 
-// RENDER SEARCH RESULT IN HTML !!!!!!!!!!!
+// RENDER SEARCH RESULT IN HTML
 function renderList (listDrinks) {
     for (const drink of listDrinks) {
         
@@ -87,7 +86,7 @@ let favorites = [];
 
 function handleClickOnDrink (event) {
     
-    // Obtain on which drink I'm clicking:
+    // Obtain which drink I'm clicking on:
     const idSelectedDrink = event.currentTarget.id; 
 
     const foundDrink = drinksList.find(clickedDrink=>{
@@ -139,6 +138,7 @@ if(localStorageFavorites !== null){
   else{
   // There is no data in local storage.
   // Fetch favorites from server:
+
   fetch(`${SERVER_URL}${inputValue}`)
   .then(response => response.json())
   .then(data => {
