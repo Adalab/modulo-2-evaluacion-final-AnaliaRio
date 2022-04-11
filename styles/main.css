@@ -27,31 +27,45 @@
 }
 
 .subtitle {
+    height: 55px;
     font-size: 30px;
-    margin-bottom: 15px;
-
+    padding: 9px 0 0 10px;
+    background-color: slategray;
+    color: white;
 }
 
 .section {
     display: flex;
     flex-direction: row;
-    gap: 150px;
+    gap: 50px;
 }
 
 .article{
     display: flex;
     flex-direction: column;
+    border: solid 1px darkslategray;
+    border-radius: 10px;
 }
 
 .favorites-article {
-width: 25%;
-border: solid 3px brown;
+    width: 25%;
 }
 
 .list-article {
-width: 75%;
-border: solid 3px brown;
+    width: 75%;
+}
 
+.favorites {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .input, .btn {
@@ -62,6 +76,7 @@ border: solid 3px brown;
 
 .drink-name {
     margin-bottom: 5px;
+    overflow-wrap: break-word;
 }
 
 .img {
@@ -90,26 +105,21 @@ border: solid 3px brown;
 }
 
 .favorite {
-    border: solid 2px rgb(96, 38, 27);
+    border: solid 1px darkslategray;
 
 }
 
 .li {
-    border: solid 2px rgb(96, 38, 27);
+    border: solid 1px darkslategray;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: whitesmoke;
+    padding-top: 10px;
 }
 
-.footer {
-   position: relative;
-    width: 100%;
-    padding: 0 30px 0;
-    height: 80px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: solid 1px rgba(96, 38, 27, 0.667);
-    margin: 0;
-    background-color: #fff;
-}
 
 .logo {
 width: 113px;

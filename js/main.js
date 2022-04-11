@@ -124,3 +124,9 @@ function renderFavorites (favorites) {
     }
  
 };
+
+// LOCAL STORAGE
+// localStorage.setItem('favorites', JSON.stringify(favorites));
+// });
+// }
+// }
