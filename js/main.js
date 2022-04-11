@@ -4,10 +4,11 @@
 const input = document.querySelector(".js-input");
 const searchBtn = document.querySelector(".js-search");
 const resetBtn = document.querySelector(".js-reset");
+const resetFavoritesBtn = document.querySelector(".js-reset-favorites");
 const renderedList = document.querySelector(".js-list");
 const renderedFavoritesList = document.querySelector(".js-favorites");
 const inputValue = input.value;
-// const SERVER_URL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita"
+const SERVER_URL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
 
 
 // FETCH DATA FROM API
@@ -16,8 +17,7 @@ let drinksList = [];
 function getData () {
 const inputValue = input.value;
 
- fetch(
-     `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${inputValue}`)
+ fetch(`${SERVER_URL}${inputValue}`)
   .then(response => response.json())
   .then(data => {
     drinksList = data.drinks;
@@ -31,14 +31,14 @@ function renderList (listDrinks) {
         
         const favoriteFoundIndex = favorites.findIndex(fav=>{
             return fav.idDrink !== -1;
-            // Encontrar variable que dice si drink es favorito o no
+            // Find variable that says if drink is favorite or not.
         }); 
     
-        if( favoriteFoundIndex === -1){ // No está en favoritos
+        if( favoriteFoundIndex === -1){ // Not in favorites.
             renderedList.innerHTML += `<li class="li liDrink" id=${drink.idDrink} ><h2 class="drink-name">${drink.strDrink}</h2><img src=${drink.strDrinkThumb} class="img" alt="cocktail"></li>`;
         }
 
-        else { //Está en favoritos
+        else { // In favorites.
             renderedList.innerHTML += `<li class="li favorite liDrink" id=${drink.idDrink}><h2 class="drink-name">${drink.strDrink}</h2><img src=${drink.strDrinkThumb} class="img" alt="cocktail"></li>`;
         }
 
@@ -58,7 +58,6 @@ function handleSearchBtnClick(event) {
 }
 
 searchBtn.addEventListener("click",handleSearchBtnClick);
-
 
 // RESET RENDERED DRINK LIST & EMPTY THE ARRAY WITH THE DATA
 function resetList () {
@@ -83,28 +82,28 @@ function fillerImage(data) {
     }
 ;}
 
-// SELECT FAVORITE DRINKS !!!!!!!!!!
+// SELECT FAVORITE DRINKS
 let favorites = [];
 
 function handleClickOnDrink (event) {
     
-    // Obtener sobre qué bebida hago click
+    // Obtain on which drink I'm clicking:
     const idSelectedDrink = event.currentTarget.id; 
 
     const foundDrink = drinksList.find(clickedDrink=>{
         return clickedDrink.idDrink === idSelectedDrink;
     });
 
-    // Compruebo si la bebida que recibo por parámetro está en los favoritos
+    // Check if drink I get as a parameter is in favorites:
     const favoriteFoundIndex = favorites.findIndex(fav=>{
         return fav.idDrink === idSelectedDrink; 
     }); 
 
-    if(favoriteFoundIndex === -1){ //No lo encontró
+    if(favoriteFoundIndex === -1){ // Didn't find it.
         favorites.push(foundDrink);  
     }
     else {
-    //eliminar de la lista de favoritos
+    // Remove from favorites list.
         favorites.splice(favoriteFoundIndex,1); 
     }
 
@@ -129,24 +128,30 @@ function renderFavorites (favorites) {
 localStorage.setItem("favorites", "lsFavorites");
 const localStorageFavorites = JSON.parse(localStorage.getItem("lsFavorites"));
 
-// Validar si datos son válidos
-// Si es la primera vez que entro en la página:
+// Validate data.
+// If it's the first time I open the page:
+
 if(localStorageFavorites !== null){
     favorites= localStorageFavorites; 
     renderFavorites(favorites);
   }
+
   else{
-  // No tengo datos en el local storage
-  // Fetch favorites form server
-  fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${inputValue}`)
+  // There is no data in local storage.
+  // Fetch favorites from server:
+  fetch(`${SERVER_URL}${inputValue}`)
   .then(response => response.json())
   .then(data => {
-      // Guardar en variable global de favoritos
+
+      // Save in global variable:
       favorites = data.favorites; 
-      // sí tengo datos en el local storage, así lo parseo a un array 
+
+      // If I have data in local storage it must be parsed into an array: 
       localStorage.setItem("lsFavorites", JSON.stringify(favorites));
-      //Paint/renderizar HTML
-      // cada vez que modifico los arrays de favoritos vuelvo pintar y a escuchar eventos
-      renderFavorites(favorites); 
+
+      //Paint/render HTML.
+      // Every single time an array is modified it has to be rendered again. Events must be listened to again:
+      renderFavorites(favorites);
+
   });
 };
